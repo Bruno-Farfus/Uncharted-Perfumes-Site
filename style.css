@@ -1,25 +1,36 @@
+/* ================================================ 
+   ================================================ 
+             ESTILOS GLOBAIS E RESET          
+   ================================================                         
+   ================================================ */
 
 *{
     font-family: 'Noto Serif', serif;
-    margin: 0; /* Remove a margem padrão do navegador */
+    margin: 0; 
     padding: 0;
     line-height: 1.6;
     /*border: 1px solid red;*/
 }
 
-/* Adicione este código ao topo do seu CSS */
 html {
     scroll-behavior: smooth;
 }
 
+
+    /* ================================================ 
+   ================================================ 
+             COMPONENTES GLOBAIS          
+   ================================================                         
+   ================================================ */
+
 @keyframes saida-cinematografica {
   from {
     opacity: 1;
-    transform: scale(1); /* Começa no tamanho normal e totalmente visível */
+    transform: scale(1); /* animação de saido do banner */
   }
   to {
     opacity: 0;
-    transform: scale(0.95); /* Termina invisível e um pouco menor */
+    transform: scale(0.95); 
   }
 }
 
@@ -27,77 +38,118 @@ body{
     background-color: #192112;
 }
 
-/* Estilo para TODAS as seções principais, para manter um padrão */
+/*padrão de sessões principais*/
 section, footer {
-    padding: 60px 20px; /* 60px de espaço interno em cima/baixo, 20px nas laterais */
-    text-align: center; /* Centraliza o texto por padrão em todas as seções */
+    padding: 60px 20px; 
+    text-align: center; 
        background-color: #192112;
 }
 
-/*-----------------CABEÇALHO-------------------*/
-
-.container-topo {
-    position: relative; /* Define este container como a "âncora" de posicionamento */
+.container-geral {
+    max-width: 1200px; 
+    margin: 0 auto;   
+    padding: 0 20px;  
 }
 
-/* estilo da barra de navegação inteira */
+
+/*----------Banner reutilizavel--------------*/
+
+
+.banner.banner-interno {
+    height: 65vh; 
+    position: relative; 
+    overflow: hidden;
+}
+
+.banner-fundo-imagem {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* cobre toda a area sem distorcer*/
+    z-index: -1; /* joga a imagem para tras do conte.[iudo*/
+}
+
+.banner-interno::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(25, 33, 18, 0.3); /* Camada escura com 30% de opacidade */
+    z-index: 0; 
+}
+
+.banner-interno .banner-conteudo {
+    padding-bottom: 0;
+}
+
+
+
+
+
+/* ================================================ 
+   ================================================ 
+             ESTILOS HOME PAGE          
+   ================================================                         
+   ================================================ */
+
+
+
+/*-------------------CABEÇALHOO----------------------------*/
 .navbar {
+    /*efeito vidrto */
     background-color: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     padding: 15px 0;
-
-    /* A MUDANÇA ESTÁ AQUI */
-    position: absolute; /* Flutua sobre o conteúdo dentro do seu pai relativo */
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 10; /* Garante que fique na frente do banner */
+    /*garante que fica na frente */
+    z-index: 1000; 
 }
 
-/* o contêiner que segura o conteúdo do menu */
+/*o contêiner que segura o conteúdo do menu*/
 .navbar-container {
-    max-width: 1200px; /* Define uma largura máxima */
-    margin: 0 auto;    /* Centraliza o contêiner na página */
-    padding: 0 20px;   /* Espaçamento nas laterais */
-
+    max-width: 1200px; 
+    margin: 0 auto;   
+    padding: 0 20px;   
     display: grid;
-    /* cria 3 colunas: 
-       1fr (espaço flexível à esquerda), 
-       auto (tamanho automático para o logo), 
-       1fr (espaço flexível à direita) */
-    grid-template-columns: 1fr auto 1fr;
-    align-items: center; /* Alinha verticalmente os itens no centro */
+    grid-template-columns: 1fr auto 1fr; /* espaço | logo | espaço */
+    align-items: center;            
 }
 
-/* Estilo do logo */
+/*tetxo da logo*/
 .brand-logo {
-    grid-column: 2; /* Coloca o logo na SEGUNDA coluna da grade */
-    justify-self: center; /* Centraliza o logo dentro da sua célula da grade */
-    
+    grid-column: 2;
+    justify-self: center;
     color: white;
     text-decoration: none;
-    font-family: 'Noto Serif', serif;
     font-size: 1.8rem;
-    font-weight: 400;
+    font-weight: 700;
 }
 
-/* Estilo do botão sanduíche */
-.hamburger-menu {
-    grid-column: 3; /* Coloca o menu na TERCEIRA coluna da grade */
-    justify-self: end; /* Alinha o menu no FINAL (direita) da sua célula */
+/* o container que segura o ícone e o menu dropdown*/
+.menu-dropdown-container {
+    position: relative; /* ancora o menu no lugar*/
+    grid-column: 3;
+    justify-self: end;
+}
 
-    background: none;
-    border: none;
+/* o ícone do sanduíche */
+.hamburger-icon {
     cursor: pointer;
     display: flex;
     flex-direction: column;
-    gap: 5px; /* Espaço entre as barrinhas */
-    padding: 5px;
+    gap: 5px; 
+    padding: 10px;
 }
 
-/* Estilo das barrinhas do sanduíche */
-.hamburger-menu .bar {
+.hamburger-icon .bar {
     display: block;
     width: 25px;
     height: 3px;
@@ -105,11 +157,53 @@ section, footer {
     border-radius: 2px;
 }
 
+/*o menuzinho drop*/
+.menu-dropdown {
+    position: absolute;
+    top: 100%; 
+    right: 0;  
+    background-color: #192112;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 10px 0;
+    width: 200px; 
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+}
+
+/* hover pra aparecer o menu*/
+.menu-dropdown-container:hover .menu-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/*estilo da lista e dos link */
+.menu-dropdown ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.menu-dropdown a {
+    display: block; 
+    padding: 12px 20px;
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: background-color 0.2s ease;
+}
+
+.menu-dropdown a:hover {
+    background-color: rgba(255, 255, 255, 0.1); 
+}
+
 /*-------------------BANNER HERO----------------------------*/
 
-
 .banner {
-       /* ... Suas propriedades existentes como position, height, etc. ... */
     position: relative;
     overflow: hidden;
     height: 95vh;
@@ -120,20 +214,17 @@ section, footer {
     align-items: center;     
     background-color: transparent;
 
-    /* --- ANIMAÇÃO DE SAÍDA --- */
+    /*animacao da saida */
 
     animation: saida-cinematografica linear;
     animation-timeline: view();
 
-    /* MODIFICAÇÃO 1: A animação agora vai até o final da saída */
     animation-range-start: exit 0%;
-    animation-range-end: exit 99%; /* Mudei de 50% para 99% */
+    animation-range-end: exit 99%; 
     
-    /* MODIFICAÇÃO 2: A SOLUÇÃO PARA O "SALTO" */
     animation-fill-mode: both;
 }
 
-/* NOVO: Adicionamos a camada escura para garantir a legibilidade do texto */
 .banner::after {
     content: '';
     position: absolute;
@@ -141,12 +232,10 @@ section, footer {
     left: 0;
     width: 100%;
     height: 100%;
-    /* Usando a cor de fundo do seu site com transparência */
     background-color: rgba(25, 33, 18, 0.5); 
-    z-index: 0; /* Fica entre o vídeo (camada -1) e o conteúdo (camada 1) */
+    z-index: 0; 
 }
 
-/* MODIFICADO: Sua regra para o vídeo está correta, apenas confirmando */
 .banner-video {
     position: absolute;
     top: 50%;
@@ -156,19 +245,17 @@ section, footer {
     min-height: 100%;
     width: auto;
     height: auto;
-    z-index: -1; /* Joga o vídeo para a camada mais profunda */
+    z-index: -1; /*dx o video na ultima camada*/
     object-fit: cover;
 }
 
-/* MODIFICADO: Garantimos que o conteúdo fique na camada da frente */
 .banner-conteudo {
     text-align: center; 
     padding-bottom: 10vh;
-    position: relative; /* Necessário para que o z-index funcione corretamente */
-    z-index: 1; /* Coloca o conteúdo na camada 1, na frente de tudo */
+    position: relative; 
+    z-index: 1; 
 }
 
-/* As regras abaixo (h1, slogan, botao) não precisam de alteração */
 .banner-conteudo h1 {
     font-size: 5rem;
     font-weight: 700;  
@@ -225,30 +312,30 @@ section, footer {
 
 
 .secao-produto {
-    color: white; /* Define a cor do texto para branco, como na imagem */
-    max-width: 1000px; /* Define uma largura máxima para a seção */
-    margin: 0 auto; /* Centraliza a seção na página */
-    text-align: left; /* Alinha o texto da seção à esquerda por padrão */
+    color: white;
+    max-width: 1000px; 
+    margin: 0 auto; /*centraliza */
+    text-align: left; /*alinha*/
 }
 
 .titulo-secao {
     font-size: 2.5rem;
-    margin-bottom: 40px; /* Espaço abaixo do título */
+    margin-bottom: 40px; /*Espaço abaixo do título */
     text-align: left;
 }
 
-/* --- Layout Principal do Produto --- */
+/*Layout Principqal do Produto */
 .produto-grid-container {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Duas colunas de tamanho igual */
-    grid-template-rows: auto auto;    /* Duas linhas com altura automática */
-    gap: 20px; /* Espaço entre as células da grade */
+    grid-template-columns: 1fr 1fr; /*duas colunas do mesmo tamanho*/
+    grid-template-rows: auto auto;    /*duaas linahs*/
+    gap: 20px;
 }
 
 .produto-texto {
     grid-column: 1; /* Coloca na primeira coluna */
     grid-row: 1;    /* Coloca na primeira linha */
-    padding-right: 20px; /* Um respiro para o texto não colar na imagem */
+    padding-right: 20px; /*pro texto n colar na imagem */
 }
 
 .produto-texto h3 {
@@ -257,16 +344,15 @@ section, footer {
 }
 
 .imagem-paisagem {
-    grid-column: 1; /* Coloca na primeira coluna */
-    grid-row: 2;    /* Coloca na segunda linha */
+    grid-column: 1; /*Coloca na primeira coluna */
+    grid-row: 2;    /* Coloca na segunda linha*/
 }
 
 .imagem-produto-principal {
-    grid-column: 2;     /* Coloca na segunda coluna */
-    grid-row: 1 / 3;    /* FAZ A MÁGICA: Ocupa da linha 1 ATÉ a linha 3 (ou seja, 2 linhas) */
+    grid-column: 2;     /*Coloca na segunda coluna*/
+    grid-row: 1 / 3;  /*ocupa da linha 1 a linha 3 (2 linhas */
 }
 
-/* Regra importante para TODAS as imagens dentro da grade se comportarem bem */
 .produto-grid-container img {
     width: 100%;
     height: 100%;
@@ -274,14 +360,14 @@ section, footer {
     border-radius: 15px; /* Bordas arredondadas como no design */
 }
 
-/* --- Layout dos Ingredientes --- */
+/*Layout dos Ingredientes*/
 .ingredientes-container {
-    margin-top: 60px; /* Espaço acima da seção de ingredientes */
+    margin-top: 60px;
 }
 
 .ingredientes-grid {
     display: grid;
-    /* Cria 5 colunas de tamanho igual. Perfeito para isso! */
+    /*5 colunas de tamanho igual*/
     grid-template-columns: repeat(5, 1fr);
     gap: 20px;
 }
@@ -292,7 +378,7 @@ section, footer {
 
 .ingrediente-item img {
     width: 100%;
-    aspect-ratio: 1 / 1; /* Força a imagem a ser um quadrado perfeito */
+    aspect-ratio: 1 / 1; /*vira um quadrado*/
     object-fit: cover;
     border-radius: 10px;
     margin-bottom: 10px;
@@ -304,19 +390,18 @@ section, footer {
 
 /*----------------inverter layout grid----------------*/
 
-/* Define que, quando a classe .layout-reverso existir, 
-   os itens de texto e paisagem vão para a coluna 2 */
+/*usar no i=segundo produto da home, pra inverter a ordem dos elementoss*/
 .layout-reverso .produto-texto,
 .layout-reverso .imagem-paisagem {
     grid-column: 2;
 }
 
-/* Define que a imagem principal vai para a coluna 1 */
+/*imagem principal vai para a coluna 1*/
 .layout-reverso .imagem-produto-principal {
     grid-column: 1;
 }
 
-/* E ajustamos o padding do texto no layout reverso para o lado oposto */
+/*padding do texto no layout reverso para o outro laod*/
 .layout-reverso .produto-texto {
     padding-right: 0;
     padding-left: 20px;
@@ -325,43 +410,36 @@ section, footer {
 /*---------------------------Sobre nós home-----------------------------*/
 
 .secao-historia {
-    color: white; /* Cor do texto padrão para a seção */
-    padding: 60px 0; /* Espaçamento vertical */
-    /* A cor de fundo já deve ser herdada do seu body ou de uma regra geral */
+    color: white;
+    padding: 60px 0; 
 }
 
-/* O título já deve pegar o estilo de .titulo-secao, mas podemos garantir */
 .secao-historia .titulo-secao {
     text-align: left;
     margin-bottom: 30px;
 }
 
-/* Container da imagem, necessário para o efeito de gradiente */
-/* Container da imagem, agora com proporção definida */
 .historia-imagem-container {
     position: relative;
     margin-bottom: 40px;
     line-height: 0;
 
-    /* --- AS MUDANÇAS PRINCIPAIS ESTÃO AQUI --- */
-    aspect-ratio: 16 / 7; /* Força o container a ter uma proporção widescreen */
-    overflow: hidden;     /* Esconde qualquer parte da imagem que "vazar" */
-    border-radius: 15px;  /* Aplicamos o arredondamento aqui, no container */
+    aspect-ratio: 16 / 7; 
+    overflow: hidden;     
+    border-radius: 15px;  
 }
 
-/* A imagem em si, agora vai preencher o container de forma inteligente */
 .historia-imagem-container img {
     width: 100%;
-    height: 100%;       /* Força a imagem a ter 100% da altura do NOVO container */
-    object-fit: cover;  /* Cobre toda a área sem distorcer (pode cortar o excesso vertical) */
+    height: 100%;      
+    object-fit: cover;  
 }
 
-/* Estilo para o parágrafo da história */
-
+/*parágrafo da história*/
 .historia-texto {
     font-size: 1.1rem;
     line-height: 1.7;
-    max-width: 800px; /* Limita a largura do parágrafo para melhor legibilidade */
+    max-width: 800px; 
     text-align: justify;
 
 }
@@ -372,13 +450,481 @@ footer {
     color: white;
 }
 
-/* Onde a mágica do alinhamento interno acontece! */
+/*alinhar tudo certimho*/
 .secao-produto .conteudo-interno {
-    display: flex; /* Usamos Flexbox para alinhar imagem e texto lado a lado */
-    align-items: center; /* Alinha verticalmente no centro */
-    justify-content: center; /* Alinha horizontalmente no centro */
-    gap: 40px; /* Um espaço entre a imagem e o texto */
-    max-width: 1200px; /* Limita a largura do conteúdo */
-    margin: 0 auto; /* Truque para centralizar o container de conteúdo */
-    text-align: left; /* Alinha o texto da descrição à esquerda */
+    display: flex; /*alinhar imagem e texto lado a lado*/
+    align-items: center; 
+    justify-content: center;
+    gap: 40px; 
+    max-width: 1200px; /*largura do conteúdo*/
+    margin: 0 auto; /*centralizar o container de conteúdo*/
+    text-align: left; /*texto da descrição à esquerda*/
 }
+
+
+
+/* ================================================ 
+   ================================================ 
+             ESTILOS SOBRE NÓS PAGE          
+   ================================================                         
+   ================================================ */
+
+/*++-+---------------nossas Fragrancias+--------------*/
+
+.secao-fragrancias .produto-texto {
+    /*espaçamento interno para aumentar a altura do bloco*/
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.secao-fragrancias .produto-texto p {
+    font-size: 1.2rem;   /*maior que o padrão (1.1rem) */
+    line-height: 1.8;    /* Mais espaçamento(1.7) */
+    text-align: left;    
+    word-spacing: 10px;
+}
+
+/*+----------------Isabella Rossi--------------*/
+
+ .secao-perfil .titulo-impacto {
+    margin-bottom: 50px;
+}
+
+/* container*/
+.perfil-grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /*3 colunas de tamanho igual */
+    grid-template-rows: auto auto;         /*2 linhas de altura automática */
+    gap: 30px;                             /* espaço entre os itens*/
+    align-items: start;                    /*alinha os itens no topo de suas células */
+}
+
+.perfil-imagem-pequena {
+    grid-column: 1; /*primeira coluna */
+    grid-row: 1;    /*primeira linha */
+}
+
+.perfil-texto {
+    grid-column: 2 / 4; 
+    grid-row: 1;        /*primeira linha */
+}
+
+.perfil-imagem-grande {
+    grid-column: 1 / 4; 
+    grid-row: 2;        /*segunda linha */
+    aspect-ratio: 21 / 6; /*formato panoramico*/
+    overflow: hidden;     /*n dx vazar */
+}
+
+.perfil-texto p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: white;
+    text-align: justify;
+    hyphens: auto;
+}
+
+/*imagens do grid */
+.perfil-grid-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+    display: block;
+}
+
+
+/* ================================================ 
+   ================================================ 
+             ESTILOS PERFUMES PAGE          
+   ================================================                         
+   ================================================ */
+
+.secao-grid-perfumes {
+    padding: 60px 0;
+    color: white;
+}
+
+/*container da grade de 3 colunas */
+.perfume-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /*3 colunas tamanho igual */
+    gap: 40px; 
+
+    max-width: 80%;   
+    margin: 0 auto;     /*Centraliza*/
+}
+
+/*estilo do card individual*/
+.produto-card {
+    background-color: transparent; /*O fundo é o do body*/
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /*hover s0uave*/
+}
+
+/*hover*/
+.produto-card:hover {
+    transform: translateY(-8px); 
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.produto-card img {
+    width: 100%;
+    aspect-ratio: 3 / 4; 
+    object-fit: cover;   
+    border-radius: 15px;
+    margin-bottom: 20px; 
+}
+
+.card-conteudo {
+    padding: 0 10px;
+}
+
+/*nome do perfume */
+.card-conteudo h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+/*descrição do perfume */
+.card-conteudo p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    opacity: 0.8; /*dmais opaca*/
+}
+
+/*-------------banner em baixo---------------*/
+
+.secao-imagem-final {
+    padding: 60px 0;
+}
+
+/*container que segura a imagem e o texto */
+.imagem-overlay-container {
+    position: relative; /*precisa pra sobrepor*/
+    aspect-ratio: 13 / 4; 
+    border-radius: 15px;
+    overflow: hidden; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.imagem-overlay-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.imagem-overlay-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+/*slogan por cima de td*/
+.slogan-overlay {
+    position: relative; 
+    z-index: 1; 
+    
+    color: white;
+    font-size: 1.8rem;
+    font-style: italic;
+    font-weight: 300;
+    text-align: center;
+    padding: 0 20px; 
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* ================================================ 
+   ================================================ 
+             ESTILOS CONTATO PAGE          
+   ================================================                         
+   ================================================ */
+
+   .secao-contato {
+    padding: 60px 0;
+    color: white;
+}
+
+/* container grade de 2 colunas*/
+.contato-grid {
+    display: grid;
+    /*primeira coluna (formulário) ocupa 2, a segunda (imagem) ocupa 1*/
+    grid-template-columns: 2fr 1fr;
+    gap: 50px; 
+    align-items: center; 
+}
+
+.contato-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-grupo label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.contato-form input,
+.contato-form textarea {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.05);
+    color: white;
+    font-family: 'Noto Serif', serif;
+    font-size: 1rem;
+    box-sizing: border-box; 
+    transition: border-color 0.3s ease;
+}
+
+/*efeito quando clicar no campo */
+.contato-form input:focus,
+.contato-form textarea:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.7);
+}
+
+/*layout para os botões*/
+.form-botoes {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+/*botões (reutilizando .botao-vidro) */
+.botao-arquivo, .botao-enviar {
+    padding: 12px 25px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    background: transparent;
+    color: white;
+    cursor: pointer;
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+
+.botao-enviar {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.botao-arquivo:hover, .botao-enviar:hover {
+    background-color: white;
+    color: #192112;
+}
+
+.contato-imagem img { /*img da direita*/
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+
+
+
+
+@media (max-width: 400px) {
+
+   /*diminui o tamanho do hero*/
+   .banner {
+       height: 55vh;
+       align-items: center; 
+       justify-content: center;
+       text-align: center;
+   }
+
+   /*compacta o texto dele */
+   .banner-conteudo {
+       padding: 0 15px; 
+   }
+
+   .banner-conteudo h1 {
+       font-size: 2.2rem; 
+       line-height: 1.1; 
+       margin-bottom: 0.2rem;
+   }
+
+   .banner-conteudo .slogan {
+       font-size: 0.9rem; /*diminui td*/
+       line-height: 1.3;
+       padding: 0 15px; 
+       margin-bottom: 1rem;
+   }
+
+   .botao-vidro {
+       padding: 8px 20px; /*tamanho do botão*/
+       font-size: 0.75rem; /*fonte do botão*/
+       margin-top: 25px;
+   }
+
+   .ingredientes-container {
+    display: none;
+}
+   
+}
+
+
+@media (max-width: 768px) {
+
+    /* --- AJUSTES GERAIS PARA MOBILE --- */
+    .secao-produto {
+        max-width: 100%; 
+        padding: 0 20px;
+        box-sizing: border-box; 
+    }
+
+    main {
+        padding-top: 100px;
+    }
+
+    .titulo-secao, .titulo-impacto, #frase-impacto {
+        font-size: 2rem;
+        text-align: center;
+    }
+
+
+    /* --- SEÇÃO DE PRODUTOS (HOMEPAGE) --- */
+    .produto-grid-container {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .imagem-paisagem {
+        display: none; 
+    }
+
+    .imagem-produto-principal,
+    .layout-reverso .imagem-produto-principal {
+        grid-column: 1;
+        grid-row: 1;   
+    }
+
+    .produto-texto,
+    .layout-reverso .produto-texto {
+        grid-column: 1; 
+        grid-row: 2;
+        padding: 0 10px;
+        text-align: center; 
+    }
+
+    /* --- PÁGINA SOBRE NÓS: Seção Fragrâncias --- */
+    .secao-fragrancias .container-geral {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .secao-fragrancias .produto-grid-container {
+        grid-template-columns: 1fr;
+    }
+
+    .secao-fragrancias .produto-texto,
+    .secao-fragrancias .imagem-produto-principal {
+        grid-column: 1;
+    }
+
+    .secao-fragrancias .imagem-produto-principal { 
+        grid-row: 1; 
+        height: 250px;
+        overflow: hidden;
+        margin-bottom: 20px; 
+    }
+
+    .secao-fragrancias .produto-texto {
+        grid-row: 2;
+        text-align: center; 
+    }
+
+    .secao-fragrancias .produto-texto p {
+        font-size: 1rem;
+        line-height: 1.7; 
+        text-align: justify;
+        hyphens: auto;
+        word-spacing: -2px;
+    }
+
+    /*--- PÁGINA SOBRE NÓS: Seção Isabella Rossi ---*/
+    .perfil-grid-container {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .perfil-imagem-pequena {
+        display: none;
+    }
+    
+    .perfil-imagem-grande {
+        grid-column: 1;
+        grid-row: 1;
+        aspect-ratio: 1 / 1;
+    }
+    
+    .perfil-texto {
+        grid-column: 1;
+        grid-row: 2;
+    }
+
+    .perfil-texto p {
+        font-size: 1rem;
+        text-align: center;
+    }
+
+    /* --- PÁGINA PERFUMES --- */
+    .perfume-grid {
+        grid-template-columns: 1fr 1fr;
+        max-width: 100%;         
+        gap: 20px;             
+    }
+
+    .perfume-grid .card-conteudo h3 {
+        font-size: 1.1rem;
+    }
+
+    .perfume-grid .card-conteudo p {
+        font-size: 0.85rem;
+    }
+
+    /* --- PÁGINA CONTATO --- */
+    .contato-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .contato-imagem {
+        display: none;
+    }
+
+    .form-botoes {
+        flex-direction: column; 
+        gap: 15px;               
+        align-items: center;    
+    }
+}
+
+
+
+
+
+
+
+    
+
+
+
+
