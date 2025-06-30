@@ -782,17 +782,13 @@ footer {
 }
 
 
-@media (max-width: 500px) {
+@media (max-width: 768px) {
 
     /* --- AJUSTES GERAIS PARA MOBILE --- */
     .secao-produto {
         max-width: 100%; 
         padding: 0 20px;
         box-sizing: border-box; 
-    }
-
-    main {
-        padding-top: 100px;
     }
 
     .titulo-secao, .titulo-impacto, #frase-impacto {
